@@ -1,4 +1,4 @@
-# CommandBot
+# About the project
 
 CommandBot is a discord bot that is multi-functional when it comes to the commands that it currently supports. I started this project for fun, but then it turned into something that I valued and thoroughly enjoyed creating.
 
