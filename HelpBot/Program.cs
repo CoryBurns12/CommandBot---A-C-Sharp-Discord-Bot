@@ -8,8 +8,6 @@ using System.Collections.Generic;
 using DSharpPlus.CommandsNext.Exceptions;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
-using DSharpPlus.Net;
-using DSharpPlus.Lavalink;
 using DSharpPlus.SlashCommands;
 using System;
 
@@ -54,23 +52,7 @@ namespace HelpBot
             Commands.RegisterCommands<TestCommands>();
             slashCommands.RegisterCommands<SlashCommands>();
 
-            // Lavalink
-            var connect = new ConnectionEndpoint
-            {
-                Hostname = "v3.lavalink.rocks",
-                Port = 443,
-                Secured = true,     
-            };
-            var lavaConfig = new LavalinkConfiguration
-            {
-                Password = "horizxon.tech",
-                RestEndpoint = connect,
-                SocketEndpoint = connect
-            };
-            var lavalink = Client.UseLavalink();
-
             await Client.ConnectAsync();
-            await lavalink.ConnectAsync(lavaConfig);
             await Task.Delay(-1); // Keeps bot running indefinitely 
         }
 

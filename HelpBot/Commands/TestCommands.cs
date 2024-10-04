@@ -8,19 +8,10 @@ using System.Threading.Tasks;
 using HelpBot.Games.Jokes;
 using HelpBot.Games.RockPaperScissors;
 using HelpBot.Games.RandomFact;
-using DSharpPlus.Lavalink;
-using System.Linq;
-using DSharpPlus.CommandsNext.Exceptions;
-using DSharpPlus;
-using System.ComponentModel;
-
 namespace HelpBot.Commands
 {
     public class TestCommands : BaseCommandModule
     {
-        // Store the game state
-        private static readonly ConcurrentDictionary<ulong, int> UserNumberToGuess = new ConcurrentDictionary<ulong, int>(); // holds the number that the user is trying to guess
-        private static readonly ConcurrentDictionary<ulong, int> UserGuesses = new ConcurrentDictionary<ulong, int>(); // Holds an integer value of the total guesses by the user
         private static readonly Random Rand = new Random();
         private bool gameOver;
 
@@ -81,50 +72,6 @@ namespace HelpBot.Commands
         {
             DateTime today = DateTime.Now;
             await cmd.RespondAsync($"Today is {today:yyyy-MM-dd}");
-        }
-
-        [Command("rng")]
-        [Cooldown(2, 4, CooldownBucketType.User)]
-        public async Task StartGame(CommandContext cmd)
-        {
-            int number = Rand.Next(1, 101); // Number between 1 and 100
-            UserNumberToGuess[cmd.User.Id] = number; // Stores number in the ConcurrentDictionary UserNumberToGuess
-            UserGuesses[cmd.User.Id] = 0; // Reset guess count
-            await cmd.RespondAsync("I have selected a number between 1 and 100. Make your guess with `!guess [number]`.");
-        }
-
-        [Command("guess")] // Not to be used individually. Must invoke the 'rng' command first!
-        [Cooldown(3, 6, CooldownBucketType.User)]
-        public static async Task GuessNumber(CommandContext cmd, int guess)
-        {
-            if (!UserNumberToGuess.TryGetValue(cmd.User.Id, out int number)) // if user has not entered '!rng' then there is no random number that is generated. This statement means that the game has not been init'd
-            {
-                await cmd.RespondAsync("You haven't started a game yet. Use `!rng` to start.");
-                return;
-            }
-
-            if (guess < 1 || guess > 100)
-            {
-                await cmd.RespondAsync("Please guess a number between 1 and 100.");
-                return;
-            }
-
-            UserGuesses[cmd.User.Id]++; // guesses of the user
-
-            if (guess == number)
-            {
-                await cmd.RespondAsync($"Congratulations! You guessed the number in {UserGuesses[cmd.User.Id]} tries.");
-                UserNumberToGuess.TryRemove(cmd.User.Id, out _); // End the game
-                UserGuesses.TryRemove(cmd.User.Id, out _); // Ends guessing
-            }
-            else if (guess < number)
-            {
-                await cmd.RespondAsync("Too low! Try again.");
-            }
-            else
-            {
-                await cmd.RespondAsync("Too high! Try again.");
-            }
         }
 
         [Command("joke")]

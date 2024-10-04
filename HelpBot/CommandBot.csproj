@@ -203,6 +203,5 @@
   <ItemGroup>
     <None Include="Config\Config.json" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
