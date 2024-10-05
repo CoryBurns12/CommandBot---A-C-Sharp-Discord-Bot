@@ -5,6 +5,8 @@ using System;
 using DSharpPlus.CommandsNext.Attributes;
 using System.Collections.Concurrent;
 using System.Linq;
+using System.Collections.Generic;
+using DSharpPlus;
 
 namespace HelpBot.Commands
 {
@@ -129,6 +131,41 @@ namespace HelpBot.Commands
             {
                 await cmd.Channel.SendMessageAsync("Too high! Try again.");
             }
+        }
+
+        [SlashCommand("binList", "list of all binary numbers to use for assistance")]
+        [Cooldown(10, 20, CooldownBucketType.User)]
+        public async Task BinList(InteractionContext cmd) // Prints values but there is a rate limit. Print is delayed by a couple seconds every 5 values
+        {
+            Dictionary<int, string> dict = new Dictionary<int, string>();
+
+            for (int i = 0; i < 256; i++)
+            {
+                dict.Add(i, Convert.ToString(i, 2).PadLeft(8, '0')); // Takes i and converts it to a string (Convert.ToString(i,2) means it converts i to base 2 which is binary) Adding padding pads it with 0s up to 8 numbers if not a 1
+            }
+
+            foreach (var key in dict)
+            {
+                await cmd.Channel.SendMessageAsync($"{key.Key} : {key.Value}"); // Prints the values of the binary numbers so users can find them easily
+            }
+        }
+
+        [SlashCommand("role", "role creation (if admin)")]
+        [RequirePermissions(Permissions.Administrator)]
+        public async Task Role(InteractionContext cmd, [Option("role", "role to create")] string role)
+        {
+            var roleName = await cmd.Guild.CreateRoleAsync(role);
+
+            if (role == "admin" || role == "bot")
+            {
+                await roleName.ModifyAsync(Customize =>
+                {
+                    Customize.Color = DiscordColor.Red;
+                    Customize.Permissions = Permissions.Administrator;
+                });
+            }
+
+            await cmd.Channel.SendMessageAsync($"Role: '{role}' created!");
         }
     }
 }
