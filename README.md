@@ -15,4 +15,8 @@ CommandBot is a discord bot that is multi-functional when it comes to the comman
 * /rng -> Generates a random number
 * /guess -> To use in unison with the '/rng' command. Allows you to guess the number generated
 * /binary -> Allows the user to type a positive whole number which is converted to binary
-* /binList
+* /binList -> Displays every binary number (in case you don't know the numbers) up to 255
+* /decimal -> The opposite of the '/binary' command. Allows the user to enter a binary number and convert it to a whole number (use '/binList' to see all binary numbers)
+
+# Admin Commands (Currently)
+* /role -> Allows the user to create a role assuming the user is an administrator and has admin permissions in their respective server.
