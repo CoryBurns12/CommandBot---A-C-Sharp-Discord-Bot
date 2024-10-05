@@ -7,6 +7,8 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Collections.Generic;
 using DSharpPlus;
+using HelpBot.Games.TruthOrDare;
+using System.Globalization;
 
 namespace HelpBot.Commands
 {
@@ -166,6 +168,41 @@ namespace HelpBot.Commands
             }
 
             await cmd.Channel.SendMessageAsync($"Role: '{role}' created!");
+        }
+
+        [SlashCommand("truth-or-dare", "generates a random truth or a dare")]
+        [Cooldown(5, 10, CooldownBucketType.User)]
+        public async Task TruthOrDare(InteractionContext cmd)
+        {
+            await cmd.Channel.SendMessageAsync("Truth or Dare?");
+        }
+
+        [SlashCommand("td", "allows user to enter truth or dare when asked")]
+        [Cooldown(10, 20, CooldownBucketType.User)]
+        public async Task TD(InteractionContext cmd, [Option("choice", "user choice")] string choice)
+        {
+            TruthOrDareConfig td = new TruthOrDareConfig();
+            string data;
+
+            try
+            {
+                if (choice == "truth")
+                {
+                    data = await td.GetTruth();
+
+                    await cmd.Channel.SendMessageAsync(data);
+                }
+                else if (choice == "dare")
+                {
+                    data = await td.GetDare();
+
+                    await cmd.Channel.SendMessageAsync(data);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
