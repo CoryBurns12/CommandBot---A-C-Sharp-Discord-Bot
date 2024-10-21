@@ -170,12 +170,6 @@ namespace HelpBot.Commands
             await cmd.Channel.SendMessageAsync($"Role: '{role}' created!");
         }
 
-        [SlashCommand("truth-or-dare", "generates a random truth or a dare")]
-        [Cooldown(5, 10, CooldownBucketType.User)]
-        public async Task TruthOrDare(InteractionContext cmd)
-        {
-            await cmd.Channel.SendMessageAsync("Truth or Dare?");
-        }
 
         [SlashCommand("td", "allows user to enter truth or dare when asked")]
         [Cooldown(10, 20, CooldownBucketType.User)]
