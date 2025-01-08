@@ -17,6 +17,7 @@ CommandBot is a discord bot that is multi-functional when it comes to the comman
 * /binary -> Allows the user to type a positive whole number which is converted to binary
 * /binList -> Displays every binary number (in case you don't know the numbers) up to 255
 * /decimal -> The opposite of the '/binary' command. Allows the user to enter a binary number and convert it to a whole number (use '/binList' to see all binary numbers)
+* /td -> Gets a random truth or dare from an API where the user can enter truth or dare in the token field
 
 # Admin Commands (Currently)
-* /role -> Allows the user to create a role assuming the user is an administrator and has admin permissions in their respective server.
+* /role -> Allows the user to create a role assuming the user is an administrator and has admin permissions in their respective server (Note: the bot can also do this assuming you set it up with admin privilages in your server).
