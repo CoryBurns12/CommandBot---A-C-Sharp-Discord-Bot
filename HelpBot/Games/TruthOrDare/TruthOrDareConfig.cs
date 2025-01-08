@@ -21,8 +21,15 @@ namespace HelpBot.Games.TruthOrDare
                 if (response.IsSuccessful)
                 {
                     JObject json = JObject.Parse(response.Content);
-                    string question = json["question"].ToString();
-                    return question;
+                    string rating = json["rating"].ToString();
+                    string truth = json["question"].ToString();
+
+
+                    if (rating.Equals("PG", StringComparison.OrdinalIgnoreCase))
+                        return truth;
+                    else
+                        return "Cannot get PG-rated question for you at this time!";
+
                 }
                 else
                 {
@@ -49,8 +56,15 @@ namespace HelpBot.Games.TruthOrDare
                 if (response.IsSuccessful)
                 {
                     JObject json = JObject.Parse(response.Content);
+                    string rating = json["rating"].ToString();
                     string dare = json["question"].ToString();
-                    return dare;
+
+
+                    if (rating.Equals("PG", StringComparison.OrdinalIgnoreCase))
+                        return dare;
+                    else
+                        return "No PG-rated dares available right now!";
+
                 }
                 else
                 {

@@ -8,7 +8,6 @@ using System.Linq;
 using System.Collections.Generic;
 using DSharpPlus;
 using HelpBot.Games.TruthOrDare;
-using System.Globalization;
 
 namespace HelpBot.Commands
 {
