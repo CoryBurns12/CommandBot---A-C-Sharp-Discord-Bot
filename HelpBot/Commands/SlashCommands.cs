@@ -165,6 +165,9 @@ namespace HelpBot.Commands
                     Customize.Permissions = Permissions.Administrator;
                 });
             }
+            else
+                await cmd.Channel.SendMessageAsync("Cannot create role! You do not have the required permissions!");
+
 
             await cmd.Channel.SendMessageAsync($"Role: '{role}' created!");
         }
