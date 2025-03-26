@@ -21,3 +21,10 @@ CommandBot is a discord bot that is multi-functional when it comes to the comman
 
 # Admin Commands (Release)
 * /role -> Allows the user to create a role assuming the user is an administrator and has admin permissions in their respective server (Note: the bot can also do this assuming you set it up with admin privilages in your server).
+
+
+
+# API Key Documentation 
+* "!joke" command works out-of-the-box, <ins>NO API KEY REQUIRED</ins>
+* "!fact" command requires an API key to work. It is free, you can find one here on this website https://api.api-ninjas.com/v1/facts (Make an environment variable called "API_KEY" for this to work) <ins>API KEY REQUIRED.</ins>
+* "/td" command works out-of-the-box as well. <ins>NO API KEY REQUIRED</ins>
