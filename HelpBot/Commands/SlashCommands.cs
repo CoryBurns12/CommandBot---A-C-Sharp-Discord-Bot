@@ -31,7 +31,7 @@ namespace HelpBot.Commands
 
         [SlashCommand("binary", "gets binary of a token that is entered (whole number)")]
         [Cooldown(2, 4, CooldownBucketType.User)]
-        public async Task Binary(InteractionContext cmd, [Option("token", "whole number for binary conversion")] long token)
+        public async Task Binary(InteractionContext cmd, [Option("Whole_Number", "whole number for binary conversion")] long token)
         {
             int remainder;
             string conversion = "";
@@ -45,7 +45,7 @@ namespace HelpBot.Commands
                     conversion = remainder.ToString() + conversion;
                 }
 
-                await cmd.Channel.SendMessageAsync($"Decimal Conversion: {conversion}");
+                await cmd.Channel.SendMessageAsync($"Binary Conversion: {conversion}");
                 Console.WriteLine("SUCCESSFUL RUN!");
             }
             catch (Exception e)

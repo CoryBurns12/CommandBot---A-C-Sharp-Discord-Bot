@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
-using HelpBot.Config;
 using HelpBot.Commands;
 using DSharpPlus.EventArgs;
 using System.Collections.Generic;
@@ -20,13 +19,13 @@ namespace HelpBot
         public static DateTime botUpTime = DateTime.UtcNow;
         static async Task Main(string[] args)
         {
-            var jsonreader = new jsonreader();
-            await jsonreader.readjson();
+            string PREFIX = "!";
+            string BOT_TOKEN = Environment.GetEnvironmentVariable("DISCORD_BOT_TOKEN");
 
             var discordConfig = new DiscordConfiguration()
             {
                 Intents = DiscordIntents.All,
-                Token = jsonreader.token,
+                Token = BOT_TOKEN,
                 TokenType = TokenType.Bot,
                 AutoReconnect = true
             };
@@ -39,7 +38,7 @@ namespace HelpBot
 
             var commandsConfig = new CommandsNextConfiguration()
             {
-                StringPrefixes = new string[] { jsonreader.prefix },
+                StringPrefixes = new string[] { PREFIX },
                 EnableMentionPrefix = true,
                 EnableDms = true,
                 EnableDefaultHelp = false
